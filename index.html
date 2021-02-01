@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+    <title>Ejercicio Macroeconomía</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <h1>Macroeconomía</h1>
+    <h2>Prueba de examen</h2> 
+    <form>
+        <h3>Datos del alumno</h3>
+        
+        <label for="nomb">Nombre:</label> &ensp;
+        <input type="text" id="nomb" name="nomb"><br>
+        <label for="apd">Apellidos:</label> &ensp;
+        <input type="text" id="apd" name="apd"><br>
+
+        <label for="apd">Curso:</label><br>
+        <input type="radio" id="gitt" name="crs" value="gitt">
+        <label for="gitt">3ºA GITT</label><br>
+        <input type="radio" id="gittba" name="crs" value="gittba">
+        <label for="gittba">3ºB GITT+BA</label><br>  <br> 
+
+        <h3>Ejercicios</h3>
+        <h4>Pregunta 1</h4>
+        <p>
+            En este ejercicio deberás contestar a las preguntas indicadas realizando los calculos necesarios con los datos
+            expuestos en la siguiente tabla:
+        </p>
+        <table>
+            <thead>
+            <tr>
+                <th> Año &emsp; </th>
+                <th> PIB Nominal &emsp; </th>
+                <th> PIB Real &emsp; </th>
+                <th> Deflactor del PIB &emsp; </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>2018</td>
+                <td>-</td>
+                <td>410</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>2019</td>
+                <td>1170</td>
+                <td>-</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>2020</td>
+                <td>1080</td>
+                <td>480</td>
+                <td>-</td>
+            </tr>
+            </tbody>
+        </table> <br>  
+
+        <label for="e1">El PIB nominal en 2018 fue de </label>
+        <select name="e1" id="e1">
+        <option value="256">256</option>
+        <option value="783">783</option>
+        <option value="820">820</option>
+        <option value="410">410</option>
+        </select>
+        <label for="e2">.<br>El PIB Real en 2019 fue de </label>
+        <select name="e2" id="e2">
+        <option value="1040">1040</option>
+        <option value="585">585</option>
+        <option value="217">217</option>
+        <option value="1170">1170</option>
+        </select>
+        <label for="e3">.<br>El deflactor del PIB en 2020 fue de </label>
+        <select name="e3" id="e3">
+        <option value="2.56">2.56</option>
+        <option value="1.83">1.83</option>
+        <option value="4">4</option>
+        <option value="3">3</option>
+        </select> <br>  <br>  
+
+        <h4>Pregunta 2</h4>
+        <p>
+            Marcar con un tick las frases correctas aplicando la teoría estudiada en clase y acorde a la política observada
+            en las gráficas prporcionadas: <br><br>
+            <img src="img1.png" width="60%" height="60%">
+        </p>
+        
+        <ul>
+            <li>
+                <label><input type="checkbox" id="cbox1" value="1"> Esta gráfica representa una política fiscal expansiva</label><br>
+            </li>
+            <li>
+                <label><input type="checkbox" id="cbox2" value="2"> Esta gráfica representa una política monetaria expansiva </label><br>
+            </li>
+            <li>
+                <label><input type="checkbox" id="cbox3" value="3"> El cosumo aumentará</label><br>
+            </li>
+            <li>
+                <label><input type="checkbox" id="cbox4" value="4"> Es imposible saber si la inversión disminuirá </label><br>
+            </li>
+            <li>
+                <label><input type="checkbox" id="cbox4" value="4"> Esta política es recomendable si se desea disminuir la tasa de desempleo </label><br>
+            </li>
+        </ul>
+
+        <br>  
+        <h4>Pregunta 3</h4> Explique la política fiscal contractiva y para que sirve.</label><br>
+                <textarea id="msg" name="user_message" rows="4" cols="50"></textarea><br><br>
+
+        <button type="submit">Enviar respuestas</button>
+    </form>
+</body>
+</html>
