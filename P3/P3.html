@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en" class="h-100">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejercicio Macroeconomía</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="bootstrap.min.css" rel="stylesheet">
+  <link href="P3.css" rel="stylesheet">
+
+</head>
+
+<body class="d-flex h-100 text-center text-white bg-dark">
+
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="mb-auto">
+      <div>
+        <h2 class="float-md-start mb-0">Trivia Questions</h2>
+        <nav class="nav nav-masthead justify-content-center float-md-end">
+          <a class="nav-link active" aria-current="page" href="#">Choose the question</a>
+        </nav>
+      </div>
+    </header>
+
+    <div id="add">
+    </div>
+
+    <br><br>
+    <main class="px-3">
+      <form action="" method="post" class="form-api" id="form">
+
+        <label for="trivia_category">Select Category: </label>
+        <select class="form-select form-select-sm" name="trivia_category" id="category">
+          <option value="9">General Knowledge</option>
+          <option value="10">Entertainment: Books</option>
+          <option value="11">Entertainment: Film</option>
+          <option value="12">Entertainment: Music</option>
+          <option value="13">Entertainment: Musicals &amp; Theatres</option>
+          <option value="14">Entertainment: Television</option>
+          <option value="15">Entertainment: Video Games</option>
+          <option value="16">Entertainment: Board Games</option>
+          <option value="17">Science &amp; Nature</option>
+          <option value="18">Science: Computers</option>
+          <option value="19">Science: Mathematics</option>
+          <option value="20">Mythology</option>
+          <option value="21">Sports</option>
+          <option value="22">Geography</option>
+          <option value="23">History</option>
+          <option value="24">Politics</option>
+          <option value="25">Art</option>
+          <option value="26">Celebrities</option>
+          <option value="27">Animals</option>
+          <option value="28">Vehicles</option>
+          <option value="29">Entertainment: Comics</option>
+          <option value="30">Science: Gadgets</option>
+          <option value="31">Entertainment: Japanese Anime &amp; Manga</option>
+          <option value="32">Entertainment: Cartoon &amp; Animations</option>
+        </select>
+
+        <br>
+
+        <label for="trivia_difficulty">Select Difficulty: </label>
+        <select class="form-select form-select-sm" name="trivia_difficulty" id="difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+
+        <br>
+
+        <label for="trivia_type">Select Type: </label>
+        <select class="form-select form-select-sm" name="trivia_type" id="type">&gt;
+          <option value="multiple">Multiple Choice</option>
+          <option value="boolean">True / False</option>
+        </select>
+
+        <br>
+
+        <input type="hidden" name="token" value="5386e497839c72510c5bf8df0662fe17f34588ed9b3554ed217ca3efba83c7ed">
+
+        <br>
+
+        <button class="btn btn-lg btn-outline-warning btn-block" type="submit">Get Trivia Question</button>
+      </form>
+
+      <br>
+      <br>
+      <br>
+
+    </main>
+
+    <footer class="mt-auto text-white-50">
+      <p>Trivia inc.</p>
+    </footer>
+  </div>
+</body>
+
+
+<script>
+  document.getElementById("form").addEventListener('submit', trivia);
+  function trivia(event) {
+    event.preventDefault()
+    fetch(`https://opentdb.com/api.php?amount=1&category=${document.getElementById("category").value}&difficulty=${document.getElementById("difficulty").value}&type=${document.getElementById("type").value}`, {
+      headers: {
+        Accept: 'application/json'
+      },
+      method: 'GET'
+    })
+      .then(res => {
+        console.log("Response here")
+        return res.json()
+      })
+      .then(r => {
+        results = r.results[0];
+        console.log("Updating cards");
+        shQuestion();
+      })
+      .catch(e => {
+        console.error("Error " + e)
+      })
+    return false;
+  }
+
+  function shQuestion() {
+    document.getElementById("add").innerHTML = "";
+    document.getElementById("add").innerHTML += '<div class="card">'
+      + `<h5 class="card-title mt-3">${results.question}</h5>`
+      + "<br> <br>"
+      + `<label id='correct' class="text-white-50  mt-2 mb-5">${results.correct_answer}</label>`
+      + allAnswers()
+      + '</div>'
+      + "<br>"
+      + `<button type="button" onclick="shAnswer()" class="btn btn-outline-light">Show correct answer</button>`;
+  }
+
+  function allAnswers() {
+    var a = "";
+    for (var i = 0; i < results.incorrect_answers.length; i += 1) {
+      a += `&emsp;&emsp;<label class="text-white-50 mt-2 mb-5">${results.incorrect_answers[i]}</label>`;
+    }
+    return a;
+  }
+
+  function shAnswer() {
+    document.getElementById("correct").className = "text-50  mt-2 mb-5";
+    document.getElementById('correct').style.color = "green";
+    document.getElementById("correct").style.fontWeight = "900";
+  }
+
+
+</script>
+
+</html>
