@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en" class="h-100">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>T.Q.R.</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="cover.css?v=version2" rel="stylesheet">
+    <link href="contact.css?v=version2" rel="stylesheet">
+
+    <script type="text/javascript">
+        function getStatus() {
+            const address = '/api/status';
+            fetch(address, {method: 'GET'})
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                });
+        }
+
+        function validateForm() {
+            try {
+                var n = document.getElementById("name_input").value;
+                var e = document.getElementById("email_input").value;
+                var t = document.getElementById("telephone_input").value;
+                var s = document.getElementById("subject_input").value;
+                var m = document.getElementById("message_input").value;
+                const data = { name: n, email: e, telephone: t, subject: s, message: m };
+                const address = 'http://localhost:8080/api/contactVal';
+                fetch(address, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if(data.result == "OK") {
+                            console.log("Authenticated");
+                            document.getElementById("thnx").innerHTML = "<br><h2>Thanks for the message!</h2>"
+                        } else {
+                            alert("Incorrect email or/and telephone number");
+                        }
+                    });
+
+            } catch (err) {
+                console.error(err.message);
+            }
+            return false;
+        }
+    </script>
+
+</head>
+
+<body class="d-flex h-100 text-center text-white bg-dark">
+
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="mb-auto">
+        <div>
+            <h2 class="float-md-start mb-0">Trivia Questions Repository</h2>
+            <nav class="nav nav-masthead justify-content-center float-md-end">
+                <a class="nav-link" href="/home.html">Home</a>
+                <a class="nav-link active" aria-current="page" href="#">Contact</a>
+                <a class="nav-link" href="/index.html">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <br><br>
+        <div id="container">
+            <br>
+            <h1>&bull; Keep in Touch &bull;</h1>
+            <br>
+            <div class="underline">
+            </div>
+            <form method="post" action="/api/contactVal" onsubmit="return validateForm()" id="contact_form">
+                <div class="name">
+                    <label for="name_input"></label>
+                    <input type="text" placeholder="My name is" name="name" id="name_input" required>
+                </div>
+                <div class="email">
+                    <label for="email_input"></label>
+                    <input type="email" placeholder="My e-mail is" name="email" id="email_input" required>
+                </div>
+                <div class="telephone">
+                    <label for="name_input"></label>
+                    <input type="text" placeholder="My number is" name="telephone" id="telephone_input" required>
+                </div>
+                <div class="subject">
+                    <label for="subject_input"></label>
+                    <select name="subject" id="subject_input" required>
+                        <option disabled hidden selected>Subject line</option>
+                        <option>I'd like to to warn about an error</option>
+                        <option>I'd like to propose a new question</option>
+                        <option>I'd like to make a proposal</option>
+                        <option>Other option</option>
+                    </select>
+                </div>
+                <div class="message">
+                    <label for="message_input"></label>
+                    <textarea name="message" placeholder="I'd like to chat about" id="message_input" cols="30" rows="5" required></textarea>
+                </div>
+                <div class="submit">
+                    <div id="thnx">
+                    <input type="submit" value="Send Message" id="form_button" />
+                    </div>
+                </div>
+            </form><!-- // End form -->
+        </div><!-- // End #container -->
+    </main>
+    <footer class="mt-auto text-white-50">
+        <p>Trivia inc.</p>
+    </footer>
+</div>
+</body>
+</html>

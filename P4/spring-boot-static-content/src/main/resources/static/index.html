@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" class="h-100">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>T.Q.R.</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="cover.css" rel="stylesheet">
+
+    <script type="text/javascript">
+        function getStatus() {
+            const address = '/api/status';
+            fetch(address, {method: 'GET'})
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                });
+        }
+
+        function validateForm() {
+            try {
+                var e = document.getElementById("email").value;
+                var p = document.getElementById("password").value;
+                const data = { email: e, password: p };
+                console.log(data);
+                const address = '/api/login2';
+                fetch(address, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        if(data.result == "OK") {
+                            console.log("Authenticated");
+                            document.location.href="/home.html";
+                        } else {
+                            alert("Incorrect email or/and password");
+                        }
+                    });
+
+            } catch (err) {
+                console.error(err.message);
+            }
+            return false;
+        }
+    </script>
+
+</head>
+
+<body class="d-flex h-100 text-center text-white bg-dark">
+
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="mb-auto">
+        <div>
+            <h2 class="float-md-start mb-0">Trivia Questions Repository</h2>
+            <nav class="nav nav-masthead justify-content-center float-md-end">
+                <a class="nav-link"  href="#">Home</a>
+                <a class="nav-link" href="#">Contact</a>
+                <a class="nav-link active" aria-current="page" href="#">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+    <div class="login-box">
+        <h2>Log In</h2>
+        <form method="post" action="/api/login2" onsubmit="return validateForm()">
+            <div class="user-box">
+                <input type="text" name="email" id="email" required>
+                <label>E-mail</label>
+            </div>
+            <div class="user-box">
+                <input type="password" name="password" id="password" required>
+                <label>Password</label>
+            </div>
+                <input type="submit" id="submit" value="Log In">
+        </form>
+    </div>
+    </main>
+</div>
+
+</body>
+</html>
